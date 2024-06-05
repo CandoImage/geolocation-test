@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GeoLocation</title>
+    <style>
+        p[id] {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <p>Coordinates:</p>
+    <p id="coordinates"></p>
+    <p>Orientation:</p>
+    <p id="orientation"></p>
+    <p id="device"></p>
+    <script>
+        const coordinates = document.getElementById("coordinates");
+
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(
+                (position) => {
+                    console.log("Position: ", position);
+                    coordinates.innerHTML =
+                        "Latitude: " +
+                        position.coords.latitude +
+                        "<br>Longitude: " +
+                        position.coords.longitude +
+                        "<br>Heading: " +
+                        position.coords.heading;
+                },
+                (err) => console.error(err),
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        } else {
+            coordinates.innerHTML = "Geolocation is not supported by this browser.";
+        }
+
+        const onDeviceOrientationChange = (event) => {
+            console.log("Device Orientation: ", event);
+            document.getElementById(
+                "orientation"
+            ).innerHTML = `${event.alpha} : ${event.beta} : ${event.gamma}`;
+        };
+
+        if (
+            navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
+            navigator.userAgent.match(/AppleWebKit/)
+        ) {
+            document.getElementById("device").innerHTML = "iOS detected!";
+            DeviceOrientationEvent.requestPermission()
+                .then((response) => {
+                    if (response === "granted") {
+                        window.addEventListener(
+                            "deviceorientation",
+                            onDeviceOrientationChange,
+                            true
+                        );
+                    } else {
+                        document.getElementById("orientation").innerHTML =
+                            "DeviceOrientationEvent has to be allowed! Response: " + response;
+                    }
+                })
+                .catch(
+                    () =>
+                        (document.getElementById("orientation").innerHTML =
+                            "DeviceOrientationEvent not supported")
+                );
+        } else {
+            document.getElementById("device").innerHTML = "No iOS detected!";
+            window.addEventListener("deviceorientation", onDeviceOrientationChange, true);
+        }
+    </script>
+</body>
+</html>
