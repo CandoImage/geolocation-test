@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-    <p>Version 6</p>
+    <p>Version 8</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
@@ -35,7 +35,10 @@
                     console.log('Position: ', position);
                     coordinates.innerHTML = `<pre>latitude  : ${position.coords.latitude}<br>longitude : ${position.coords.longitude}<br>heading   : ${position.coords.heading}</pre>`;
                 },
-                (err) => console.error(err),
+                (error) => {
+                    console.error(error);
+                    coordinates.innerHTML = 'Error: ' + error;
+                },
                 {
                     enableHighAccuracy: true,
                     timeout: 5000,
@@ -62,7 +65,10 @@
                         orientation.innerHTML = 'DeviceOrientationEvent has to be allowed! Response: ' + response;
                     }
                 })
-                .catch(() => orientation.innerHTML = 'DeviceOrientationEvent not supported');
+                .catch((error) => {
+                    console.error(error):
+                    orientation.innerHTML = 'Error: ' + error;
+                });
         }
 
         addDeviceorientationListener();
