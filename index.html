@@ -55,6 +55,7 @@
             navigator.userAgent.match(/AppleWebKit/)
         ) {
             document.getElementById("device").innerHTML = "iOS detected!";
+            window.addEventListener("deviceorientation", onDeviceOrientationChange, true);
             DeviceOrientationEvent.requestPermission()
                 .then((response) => {
                     if (response === "granted") {
