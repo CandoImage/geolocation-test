@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <p>Version 12</p>
+    <p>Version 13</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
@@ -58,7 +58,7 @@
             window.addEventListener('deviceorientation', (event) => {
                 console.log('Orientation: ', event);
                 const compass = event.webkitCompassHeading ?? Math.abs(event.alpha - 360);
-                orientation.innerHTML = `<pre>compass : ${compass.toFixed(1)}<br/>alpha : ${event.alpha.toFixed(1)}<br/>beta  : ${event.beta.toFixed(1)}<br/>gamma : ${event.gamma.toFixed(1)}</pre>`;
+                orientation.innerHTML = `<pre>compass   : ${compass.toFixed(1)}<br/><br/>alpha     : ${event.alpha.toFixed(1)}<br/>beta      : ${event.beta.toFixed(1)}<br/>gamma     : ${event.gamma.toFixed(1)}</pre>`;
             }, true);
         };
 
