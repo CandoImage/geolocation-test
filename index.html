@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <p>Version 10</p>
+    <p>Version 11</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
@@ -57,7 +57,7 @@
         const addDeviceorientationListener = () => {
             window.addEventListener('deviceorientation', (event) => {
                 console.log('Orientation: ', event);
-                orientation.innerHTML = `<pre>alpha : ${event.alpha}<br/>beta  : ${event.beta}<br/>gamma : ${event.gamma}</pre>`;
+                orientation.innerHTML = `<pre>alpha : ${(event.alpha ?? 0).toFixed(1)}<br/>beta  : ${(event.beta ?? 0).toFixed(1)}<br/>gamma : ${(event.gamma ?? 0).toFixed(1)}</pre>`;
             }, true);
         };
 
