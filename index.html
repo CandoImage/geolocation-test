@@ -9,17 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GeoLocation</title>
     <style>
-        p {
+        p[id] {
             margin-left: 15px;
         }
     </style>
 </head>
 <body>
-    <h2>Version 4</h2>
+    <p>Version 5</p>
     <p id="device"></p>    
-    <h2>Coordinates:</h2>
+    <h3>Coordinates:</h3>
     <p id="coordinates"></p>
-    <h2>Orientation:</h2>
+    <h3>Orientation:</h3>
     <p id="orientation"></p>
 
     <script>
@@ -62,7 +62,7 @@
                         orientation.innerHTML = 'DeviceOrientationEvent has to be allowed! Response: ' + response;
                     }
                 })
-                .catch(() => orientation.innerHTML = 'DeviceOrientationEvent not supported'));
+                .catch(() => orientation.innerHTML = 'DeviceOrientationEvent not supported');
         }
 
         addDeviceorientationListener();
