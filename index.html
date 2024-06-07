@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-    <p>Version 5</p>
+    <p>Version 6</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
@@ -23,7 +23,7 @@
     <p id="orientation"></p>
 
     <script>
-        const isIOS = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
+        const isIOS = !!navigator.userAgent.match(/(iPod|iPhone|iPad)/) && !!navigator.userAgent.match(/AppleWebKit/);
         const coordinates = document.getElementById('coordinates');
         const orientation = document.getElementById('orientation');
 
