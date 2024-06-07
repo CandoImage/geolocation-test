@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <p>Version 11</p>
+    <p>Version 12</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
@@ -38,7 +38,7 @@
             navigator.geolocation.watchPosition(
                 (position) => {
                     console.log('Position: ', position);
-                    coordinates.innerHTML = `<pre>latitude  : ${position.coords.latitude}<br>longitude : ${position.coords.longitude}<br>heading   : ${position.coords.heading}</pre>`;
+                    coordinates.innerHTML = `<pre>latitude  : ${position.coords.latitude}<br/>longitude : ${position.coords.longitude}<br/>heading   : ${position.coords.heading}</pre>`;
                 },
                 (error) => {
                     console.error(error);
@@ -57,7 +57,8 @@
         const addDeviceorientationListener = () => {
             window.addEventListener('deviceorientation', (event) => {
                 console.log('Orientation: ', event);
-                orientation.innerHTML = `<pre>alpha : ${(event.alpha ?? 0).toFixed(1)}<br/>beta  : ${(event.beta ?? 0).toFixed(1)}<br/>gamma : ${(event.gamma ?? 0).toFixed(1)}</pre>`;
+                const compass = event.webkitCompassHeading ?? Math.abs(event.alpha - 360);
+                orientation.innerHTML = `<pre>compass : ${compass.toFixed(1)}<br/>alpha : ${event.alpha.toFixed(1)}<br/>beta  : ${event.beta.toFixed(1)}<br/>gamma : ${event.gamma.toFixed(1)}</pre>`;
             }, true);
         };
 
