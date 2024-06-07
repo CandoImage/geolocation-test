@@ -12,20 +12,25 @@
         p[id] {
             margin-left: 15px;
         }
+        #showOrientation {
+            display: none; 
+        }
     </style>
 </head>
 <body>
-    <p>Version 9</p>
+    <p>Version 10</p>
     <p id="device"></p>    
     <h3>Coordinates:</h3>
     <p id="coordinates"></p>
     <h3>Orientation:</h3>
+    <button id="showOrientation">Show Orientation</button>
     <p id="orientation"></p>
 
     <script>
         const isIOS = !!navigator.userAgent.match(/(iPod|iPhone|iPad)/) && !!navigator.userAgent.match(/AppleWebKit/);
         const coordinates = document.getElementById('coordinates');
         const orientation = document.getElementById('orientation');
+        const showOrientation = document.getElementById('showOrientation');
 
         document.getElementById('device').innerHTML = `Is iOS: ${isIOS}`;
 
@@ -57,21 +62,26 @@
         };
 
         if (isIOS) {
-            DeviceOrientationEvent.requestPermission()
-                .then((response) => {
-                    if (response === 'granted') {
-                        addDeviceorientationListener();
-                    } else {
-                        orientation.innerHTML = 'DeviceOrientationEvent has to be allowed! Response: ' + response;
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                    orientation.innerHTML = 'Error: ' + error;
-                });
-        }
+            showOrientation.style.display = 'block';
+            showOrientation.addEventListener('click', () => {
+                DeviceOrientationEvent.requestPermission()
+                    .then((response) => {
+                        if (response === 'granted') {
+                            addDeviceorientationListener();
+                        } else {
+                            orientation.innerHTML = 'DeviceOrientationEvent has to be allowed! Response: ' + response;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        orientation.innerHTML = 'Error: ' + error;
+                    });
+                showOrientation.style.display = 'none';
+            });
 
-        addDeviceorientationListener();
+        } else {
+            addDeviceorientationListener();
+        }
     </script>
 </body>
 </html>
