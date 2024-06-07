@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-    <p>Version 2</p>
+    <p>Version 3</p>
     <p>Coordinates:</p>
     <p id="coordinates"></p>
     <p>Orientation:</p>
@@ -28,13 +28,7 @@
             navigator.geolocation.watchPosition(
                 (position) => {
                     console.log("Position: ", position);
-                    coordinates.innerHTML =
-                        "Latitude: " +
-                        position.coords.latitude +
-                        "<br>Longitude: " +
-                        position.coords.longitude +
-                        "<br>Heading: " +
-                        position.coords.heading;
+                    coordinates.innerHTML = `<pre>latitude  : ${position.coords.latitude}<br>longitude : ${position.coords.longitude}<br>heading   : ${position.coords.heading}</pre>`;
                 },
                 (err) => console.error(err),
                 {
@@ -51,7 +45,7 @@
             console.log("Device Orientation: ", event);
             document.getElementById(
                 "orientation"
-            ).innerHTML = `<pre>alpha: ${event.alpha}<br/>beta: ${event.beta}<br/>gamma: ${event.gamma}</pre>`;
+            ).innerHTML = `<pre>alpha : ${event.alpha}<br/>beta  : ${event.beta}<br/>gamma : ${event.gamma}</pre>`;
         };
 
         if (
