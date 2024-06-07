@@ -51,7 +51,7 @@
             console.log("Device Orientation: ", event);
             document.getElementById(
                 "orientation"
-            ).innerHTML = `${event.alpha} : ${event.beta} : ${event.gamma}`;
+            ).innerHTML = `<pre>alpha: ${event.alpha}<br/>beta: ${event.beta}<br/>gamma: ${event.gamma}</pre>`;
         };
 
         if (
